@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2101564055009624052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 53817119149878424}
+  - component: {fileID: 3615540332240101160}
+  - component: {fileID: -3569206838611705893}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &53817119149878424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101564055009624052}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5610572, y: -1.8678021, z: 66141.64}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3615540332240101160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101564055009624052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3f1977e35c472499f4338f30066b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PopupUIAsset:
+    m_AssetGUID: 753c15a475bc2e749935459397a15dfa
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  PostPocessingAsset:
+    m_AssetGUID: 2abdb694ed1afda47b3add9feb3dcf93
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AddressableManageAsset:
+    m_AssetGUID: 9cc2aeac6b3039c4b8f91568d69433f4
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  GameDictionaryAsset:
+    m_AssetGUID: 01fc2d92c46cb6442888e14ce3616f06
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  UICanvasAsset:
+    m_AssetGUID: 52f730ba22fd94c4e9378c68147023a6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  UICamAsset:
+    m_AssetGUID: 738e497d555e57942aed2c48d37cc3df
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  MyAddressableManagerPrefab: {fileID: -7859538644773425556, guid: 9cc2aeac6b3039c4b8f91568d69433f4,
+    type: 3}
+  ResourcePreSetterAsset:
+    m_AssetGUID: 5906abc1fe00b8e4a8e0fa7c61280e89
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  VideoPlayerAsset:
+    m_AssetGUID: 2a2bb2c9a11f6ce44b2b22107e58fed9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  TestToolAsset:
+    m_AssetGUID: 07e6bab1e71df3f4d8f3d1fbaa8af342
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AudioPlayerAsset:
+    m_AssetGUID: 267bbf6f38780c04abb44cdcca16535f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  PoolManagerAsset:
+    m_AssetGUID: 65699df97336ba446bbfee51727ada13
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  MySceneUIAssetDic:
+    m_keys: 000000000100000002000000
+    m_values:
+    - m_AssetGUID: aa3e6eca2b9bbe1468c215fb8228c67a
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: e8e4cb3078f36654989cce99737ddb11
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: 47f3571aae87a674d94dae49d7212105
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  TargetFPS: 60
+--- !u!114 &-3569206838611705893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101564055009624052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 557bc7b52ecd54a43976c46c246ad5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfoRefreshInterval: 1

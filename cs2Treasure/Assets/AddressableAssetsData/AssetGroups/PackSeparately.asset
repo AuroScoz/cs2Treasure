@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: PackSeparately
+  m_EditorClassIdentifier: 
+  m_GroupName: PackSeparately
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8eab9f5ad35901d439ff1a8e881c4ac0
+  m_SerializeEntries:
+  - m_GUID: 7e4faf49e734f984babc17cb200f85ad
+    m_Address: Assets/AddressableAssets/Jsons
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Json
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d70839bbf13392f4bbb02797c70e873f
+    m_Address: Assets/AddressableAssets/Animation
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cb92566fbe9bf240b9168e0cdaea615
+    m_Address: Assets/AddressableAssets/Atlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Atlas
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8364aee01ec99214f887a1b54eabf862
+    m_Address: Assets/AddressableAssets/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0b6ca0a2a723204bbc05df61082a822
+    m_Address: Assets/AddressableAssets/Dlls
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Dlls
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b83bde0a1d1b28f43ad46c0d37b682a8
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_02_LOD2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0896a6414b23b504f845cf373b2f705c
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_08_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d770d5f308c0d546921efd392a4fc57
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_01_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c2da6e03398bba4c8ae35345d072392
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_13_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26c13c1b292ae3846b37a8e3d5b956de
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_03_LOD2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0eebd6754fcd54b4c81d4ecfec6889e3
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_05_LOD2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd7002041d2eb2045b509a954446caa9
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_04_LOD1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 863df0004e588234db3542069897c6a4
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_01_LOD2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e561b0703e828dc468ac7bd17eeeca15
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_MAINLight.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f3fcea84f8f2f84fbe6d2f627b900b3
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_06_LOD2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97e8061797e752241ab6a62fa71c93a0
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_11_LOD1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a91c073cd9933064db2225adf36b6a20
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_MAIN.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36ad484f79320714f87eb84a31b7458f
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_11_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4b62a414cb028e4490010c0b1081e35
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_05_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e32fe04fb27b18c4ba5f476327733166
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_05_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eac9b9c5536bf0a45ad786696ddee56b
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_10_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f2c00659dbf57444d8e1c18b3db65c97
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_01_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa3f2cc13cccf1a47b07b88cc1cc665d
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_03_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd6c1eb9b332fbd43a46ee325fa950c1
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_08_LOD1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4788ba419dc6b284b955bee9841764c9
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_06_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63c170fee4e75764a94e3182ae26de63
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_07_LOD1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89a22097cd63e4d49b4bf4fe02c0eea1
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_07_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2d2fa2464be3304d9b62a297b08db8a
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_07_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92e24a3000120dd47bbeeadf9219532c
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_10_LOD2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b57c4a8cccfc7794ea16d3a72a2abbe5
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_02_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25f6428ebfc239e4dbd5eb1eddff7e23
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_01_LOD2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d0030fcafb0ae24ba3ac7ef0788b5ce
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_06_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5aee3d796343cf4eb1848728b97ffbc
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_06_LOD1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44cd7a4a5e710a748950dcfb141ef707
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_13_LOD1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b7241911167cab4e8d6fa9f2f4df255
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_04_LOD0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d30516b30a4f544589fcb3ba78061b2
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Grass_05_LOD1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a3b403324763ec4ba92ba27c98c6f5f
+    m_Address: Assets/CartoonGrass/Materials/CartoonGrass_Plant_07_LOD2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 962081d6f735ffb4b9d494a11e24cf1f, type: 2}
+    - {fileID: 11400000, guid: 2bbf1e8df90778e4caf91bb4ee7804d4, type: 2}

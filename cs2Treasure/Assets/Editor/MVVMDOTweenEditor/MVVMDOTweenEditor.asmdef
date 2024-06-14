@@ -1,0 +1,20 @@
+{
+    "name": "MVVMDOTweenEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:832471edc4bffd14b805edd2f1790cbf",
+        "GUID:e353924064f468f48b732b2ec0d3e62a",
+        "GUID:a5ddccbea4c3b91468d3be838014c7ae"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

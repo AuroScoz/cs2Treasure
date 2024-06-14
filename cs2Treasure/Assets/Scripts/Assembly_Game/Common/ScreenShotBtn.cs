@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Scoz.Func;
+using UnityEngine.UI;
+using System;
+using System.Linq;
+
+namespace Gladiators.Main {
+    public class ScreenShotBtn : MonoBehaviour {
+
+        static ScreenCaptureCam MyCam;
+        private void Start() {
+            if (MyCam == null)
+                MyCam = Camera.main.GetComponent<ScreenCaptureCam>();
+        }
+
+        public static void SetScreenShotCamera(ScreenCaptureCam _cam) {
+            if (_cam == null) {
+                WriteLog.LogError("傳入的的ScreenCaptureCam為null");
+                return;
+            }
+            MyCam = _cam;
+        }
+
+        public void OnScreenShotClick() {
+            if (MyCam == null) {
+                WriteLog.LogError("尚未設定要螢幕截圖的ScreenCaptureCam");
+                return;
+            }
+            //PopupUI.CallScreenEffect("Flash");
+            string fileName = string.Format("{0}.jpg", GameManager.Instance.NowTime);
+            MyCam.TakePicAndGetBytes(bytes => {
+                //SpriteConvert.GetSprite(bytes);<------要將bytes轉sprite可以用這個Function
+                WriteLog.Log("螢幕截圖成功");
+                NativeGallery.SaveImageToGallery(bytes, Application.productName, fileName, OnScreenShotCB);
+            });
+        }
+        void OnScreenShotCB(bool _result, string _path) {
+            if (_result) {
+                WriteLog.Log("截圖存入裝置成功");
+            } else {
+                WriteLog.LogError("截圖存入裝置時失敗");
+                PopupUI.ShowClickCancel("Error", null);
+            }
+        }
+    }
+}

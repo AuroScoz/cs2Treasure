@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8774737948220189417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4295277515218305174}
+  - component: {fileID: 91665108986212576}
+  m_Layer: 0
+  m_Name: ResourcePreSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4295277515218305174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774737948220189417}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4700929, y: 2.351394, z: 0.20190692}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &91665108986212576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774737948220189417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9add2b108d68a3a4fa55aca06c9b7e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyMaterialDic:
+    m_keys:
+    - MonsterDie
+    - FreezeOpaque
+    - FreezeTransparent
+    - FreezeMonOp
+    - FreezeMonTr
+    m_values:
+    - {fileID: 2100000, guid: 2567fd9c585b2c6429102548fe414f93, type: 2}
+    - {fileID: 2100000, guid: ae225f42dc684f24faa67e260f8c396b, type: 2}
+    - {fileID: 2100000, guid: 6c9b3316fb761a34b9781a9737dd02f9, type: 2}
+    - {fileID: 2100000, guid: df9871d0f2ea71b41a6a90dbf4edb686, type: 2}
+    - {fileID: 2100000, guid: 74898f82166c73449ad2050c55d19eee, type: 2}
+  MonsterPrefab: {fileID: 4331850731017364515, guid: 34f8f261f2d7cb74dae7984ae976adf5,
+    type: 3}
+  BulletPrefab: {fileID: 5767403229435743466, guid: d209ab2697d8547418dbf267be01586a,
+    type: 3}
