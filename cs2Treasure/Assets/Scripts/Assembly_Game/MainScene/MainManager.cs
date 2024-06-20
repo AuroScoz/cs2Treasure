@@ -14,6 +14,7 @@ namespace cs2Treasure.Main {
         [SerializeField] Transform[] Cases;
         [SerializeField] Vector3[] CasePos;
         [SerializeField] Vector3[] CaseRot;
+        [SerializeField] ParticleSystem Particle_Flash;
 
         private void Start() {
             Init();
@@ -21,13 +22,17 @@ namespace cs2Treasure.Main {
 
         public void Init() {
             Instance = this;
-            HideCases();
+            ResetGame();
         }
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Q)) {
                 DropCase(0);
             } else if (Input.GetKeyDown(KeyCode.W)) {
             }
+        }
+        void ResetGame() {
+            Particle_Flash.gameObject.SetActive(false);
+            HideCases();
         }
 
         void HideCases() {
@@ -37,11 +42,22 @@ namespace cs2Treasure.Main {
         }
 
         public void DropCase(int _lv) {
-            HideCases();
+            ResetGame();
+            PlayDrop(_lv).Forget();
+        }
+        async UniTask PlayDrop(int _lv) {
             Cases[_lv].gameObject.SetActive(true);
             Cases[_lv].transform.localPosition = CasePos[_lv];
             var rndRot = Prob.GetRandomTFromTArray(CaseRot);
             Cases[_lv].transform.rotation = Quaternion.Euler(rndRot);
+            await UniTask.Delay(1500);
+            Particle_Flash.gameObject.SetActive(true);
+            var refSymbols = new string[6] { "AK47", "AWP", "DesertEagle", "M4A1", "NOVA", "P250" };
+            int rndIdx = UnityEngine.Random.Range(0, refSymbols.Length);
+            await UniTask.Delay(200);
+            WeaponScroller.GetInstance<WeaponScroller>()?.Play(refSymbols, rndIdx);
+            MainUI.GetInstance<MainUI>().SetResult(rndIdx + 1);
+
         }
 
     }

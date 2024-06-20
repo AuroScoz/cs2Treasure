@@ -3,23 +3,25 @@ using Scoz.Func;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 using UnityEngine.UI;
 using static Codice.CM.Common.CmCallContext;
 
 namespace cs2Treasure.Main {
-    public class WeaponScroller : MonoBehaviour {
+    public class WeaponScroller : BaseUI {
         [SerializeField] RectTransform ParentTrans;
         [SerializeField] WeaponItem[] WeaponItems;
+        [SerializeField] int ResultDelayMiliSec;
+        [SerializeField] float ScrollSpd;
+        [SerializeField] Animator TargetFrameAni;
+        [SerializeField] float ItemDist = 550;
         Transform[] WeaponTrans;
 
-        [SerializeField] float ScrollSpd;
-        private void Update() {
-            if (Input.GetKeyDown(KeyCode.Q)) {
-                Stop(0);
-            } else if (Input.GetKeyDown(KeyCode.W)) {
-                Spin();
-            }
+
+
+
+        public override void RefreshText() {
         }
         public enum SpinState {
             Stop,
@@ -29,20 +31,35 @@ namespace cs2Treasure.Main {
         }
         public SpinState CurSpinState;
         float MoveDist = 0;
-
-        private void Start() {
-            InitGame();
+        void ResetScroller() {
+            float startPos = -3 * ItemDist;
+            for (int i = 0; i < WeaponTrans.Length; i++) {
+                float posX = startPos + (i * ItemDist);
+                WeaponTrans[i].transform.localPosition = new Vector3(posX, 0, 0);
+            }
         }
 
-        void InitGame() {
+        public override void Init() {
+            base.Init();
             CurSpinState = SpinState.Stop;
             WeaponTrans = new Transform[WeaponItems.Length];
             for (int i = 0; i < WeaponItems.Length; i++) {
                 WeaponTrans[i] = WeaponItems[i].GetComponent<Transform>();
             }
             TotalLength = WeaponTrans.Length * 550;
-            SetSymbols(new string[6] { "AK47", "AWP", "DesertEagle", "M4A1", "NOVA", "P250" });
-            Spin();
+            ResetScroller();
+        }
+
+
+        public void Play(string[] _refSymbols, int _winIdx) {
+            SetActive(true);
+            SetSymbols(_refSymbols);
+            UniTask.Void(async () => {
+                Spin();
+                await UniTask.Delay(ResultDelayMiliSec);
+                Stop(_winIdx);
+            });
+
         }
 
         void SetSymbols(string[] _symbols) {
@@ -56,8 +73,11 @@ namespace cs2Treasure.Main {
                 WriteLog.LogError("SetSymbols錯誤");
             }
         }
+        void PlayFrameAni() {
+            TargetFrameAni.SetTrigger("Play");
+        }
 
-        public void Spin() {
+        void Spin() {
             CurSpinState = SpinState.Spining;
             RunSpin().Forget();
         }
@@ -70,6 +90,7 @@ namespace cs2Treasure.Main {
         async UniTask RunSpin() {
 
             var curScrollSpd = ScrollSpd;
+            float passDist = 0;
 
             while (CurSpinState == SpinState.Spining || CurSpinState == SpinState.Stopping) {
 
@@ -80,12 +101,20 @@ namespace cs2Treasure.Main {
 
 
                 MoveDist += curScrollSpd * Time.deltaTime;
+
+                // Item每經過TargetFrame就要播放TargetFrame動畫演出
+                passDist += curScrollSpd * Time.deltaTime;
+                if (passDist > ItemDist) {
+                    passDist = 0;
+                    PlayFrameAni();
+                }
+
                 if (MoveDist >= TotalLength) {
                     MoveDist -= TotalLength;
                 }
 
                 for (int i = 0; i < WeaponTrans.Length; i++) {
-                    float newX = -1650 + (i * 550) + MoveDist;
+                    float newX = -1650 + (i * ItemDist) + MoveDist;
                     if (newX > 1650) newX -= TotalLength;
                     WeaponTrans[i].localPosition = new Vector3(newX, WeaponTrans[i].localPosition.y, WeaponTrans[i].localPosition.z);
                 }
@@ -104,16 +133,27 @@ namespace cs2Treasure.Main {
         async UniTask LockToTarget(float _curScrollSpd) {
             float initialDirection = WeaponTrans[WinIdx].localPosition.x > 0 ? -1 : 1;
             var curScrollSpd = _curScrollSpd;
+            float passDist = 0;
             while (CurSpinState == SpinState.LockToTarget) {
                 float currentX = WeaponTrans[WinIdx].localPosition.x;
                 if (currentX < 0 && currentX > -200 && curScrollSpd > LockMinSpd) {
                     curScrollSpd *= StoppingDecelerationRate;
                 }
 
+
                 MoveDist += curScrollSpd * initialDirection * Time.deltaTime;
                 if (MoveDist >= TotalLength) {
                     MoveDist -= TotalLength;
                 }
+
+
+                // Item每經過TargetFrame就要播放TargetFrame動畫演出
+                passDist += curScrollSpd * Time.deltaTime;
+                if (passDist > ItemDist) {
+                    passDist = 0;
+                    PlayFrameAni();
+                }
+
                 for (int i = 0; i < WeaponTrans.Length; i++) {
                     float newX = -1650 + (i * 550) + MoveDist;
                     if (newX > 1650) newX -= TotalLength;
@@ -129,6 +169,8 @@ namespace cs2Treasure.Main {
                         currentPosition.x -= distToCenter;
                         WeaponTrans[i].localPosition = currentPosition;
                     }
+                    PlayFrameAni();
+                    Stopped();
                     break;
                 }
 
@@ -136,9 +178,20 @@ namespace cs2Treasure.Main {
             }
         }
         int WinIdx = 0;
-        public void Stop(int _winIdx) {
+        void Stop(int _winIdx) {
             CurSpinState = SpinState.Stopping;
             WinIdx = _winIdx;
         }
+        void Stopped() {
+            UniTask.Void(async () => {
+                await UniTask.Delay(500);
+                ShowResult();
+            });
+        }
+        void ShowResult() {
+            GetInstance<MainUI>()?.ShowResult();
+        }
+
+
     }
 }
