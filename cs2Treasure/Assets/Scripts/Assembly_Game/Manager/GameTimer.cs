@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class GameTimer : MonoBehaviour {
         static DateTimeOffset LastOverMidNightTime;
         public static GameTimer Instance;

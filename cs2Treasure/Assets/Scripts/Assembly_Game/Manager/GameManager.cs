@@ -8,8 +8,8 @@ using UnityEngine.Rendering.Universal;
 using LitJson;
 using Cysharp.Threading.Tasks;
 using Service.Realms;
-using Gladiators.Main;
-using Gladiators.Socket;
+using cs2Treasure.Main;
+using cs2Treasure.Socket;
 using UnityEditor.Playables;
 
 namespace Scoz.Func {

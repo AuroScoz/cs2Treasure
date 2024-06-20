@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using Service.Realms;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class GameStateManager : MonoBehaviour {
         public static GameStateManager Instance;
         public int ScheduledInGameNotificationIndex = 0;

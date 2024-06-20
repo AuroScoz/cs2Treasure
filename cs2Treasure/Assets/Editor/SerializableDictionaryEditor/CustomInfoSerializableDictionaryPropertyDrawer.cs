@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using Scoz.Func;
-using Gladiators.Battle;
 
 namespace Gladiators.Main {
     [CustomPropertyDrawer(typeof(PostProcessingManager.BloomSettingDicClass))]

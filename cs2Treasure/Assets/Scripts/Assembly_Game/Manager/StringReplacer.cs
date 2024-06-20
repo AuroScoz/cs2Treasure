@@ -1,10 +1,10 @@
-using Gladiators.Main;
+using cs2Treasure.Main;
 using Scoz.Func;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
 
     public class StringReplacer {
 

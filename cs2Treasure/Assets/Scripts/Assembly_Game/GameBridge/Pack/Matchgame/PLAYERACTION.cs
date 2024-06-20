@@ -1,4 +1,4 @@
-namespace Gladiators.Socket.Matchgame {
+namespace cs2Treasure.Socket.Matchgame {
     public class PLAYERACTION : SocketContent {
         //class名稱就是封包的CMD名稱
         public string ActionType { get; private set; }

@@ -4,23 +4,23 @@ using UnityEditor;
 using UnityEngine;
 namespace Scoz.Func {
     public class CompressEditor : MonoBehaviour {
-        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 4096(Android是 Crunched DXT5 IOS是ASTC4x4)")]
+        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 4096(Android與IOS壓成ASTC 6X6)")]
         static void CompressTextureWithMaxSize4096() {
             CompressTextureWithMaxSize(4096);
         }
-        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 2048(Android是 Crunched DXT5 IOS是ASTC4x4)")]
+        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 2048(Android與IOS壓成ASTC 6X6)")]
         static void CompressTextureWithMaxSize2048() {
             CompressTextureWithMaxSize(2048);
         }
-        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 1024(Android是 Crunched DXT5 IOS是ASTC4x4)")]
+        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 1024(Android與IOS壓成ASTC 6X6)")]
         static void CompressTextureWithMaxSize1024() {
             CompressTextureWithMaxSize(1024);
         }
-        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 512(Android是 Crunched DXT5 IOS是ASTC4x4)")]
+        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 512(Android與IOS壓成ASTC 6X6)")]
         static void CompressTextureWithMaxSize512() {
             CompressTextureWithMaxSize(512);
         }
-        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 256(Android是 Crunched DXT5 IOS是ASTC4x4)")]
+        [MenuItem("Assets/Scoz/SpriteFormat/壓縮圖檔MaxSize 256(Android與IOS壓成ASTC 6X6)")]
         static void CompressTextureWithMaxSize256() {
             CompressTextureWithMaxSize(256);
         }
@@ -35,7 +35,7 @@ namespace Scoz.Func {
                 if (obj == null)
                     continue;
                 var path = AssetDatabase.GetAssetPath(obj.GetInstanceID());
-                if (EditorUtility.DisplayCancelableProgressBar("Compressing (RGBA Crunched DXT5)... ", path, 0f)) {
+                if (EditorUtility.DisplayCancelableProgressBar("Compressing (ASTC 6X6)... ", path, 0f)) {
                     Selection.activeObject = selectObj;
                     Selection.objects = selectObjS;
                     EditorUtility.ClearProgressBar();
@@ -45,7 +45,7 @@ namespace Scoz.Func {
                 bool bChange = false;
                 var importer = AssetImporter.GetAtPath(path) as TextureImporter;
 
-                bChange |= SetTextureRGBACrunchedDXT5(importer, _maxTextureSize);
+                bChange |= SetASTC66(importer, _maxTextureSize);
 
                 if (bChange) {
                     importer.SaveAndReimport();
@@ -55,6 +55,53 @@ namespace Scoz.Func {
             Selection.activeObject = selectObj;
             Selection.objects = selectObjS;
             EditorUtility.ClearProgressBar();
+        }
+
+        static bool SetASTC66(TextureImporter _importer, int _maxTextureSize) {
+            if (_importer == null)
+                return false;
+            bool result = false;
+            var setting = _importer.GetPlatformTextureSettings("Android");
+            if (setting.format != TextureImporterFormat.ASTC_6x6 ||
+setting.compressionQuality != 100 || setting.maxTextureSize != _maxTextureSize) {
+                setting.crunchedCompression = true;
+                setting.format = TextureImporterFormat.ASTC_6x6;
+                setting.compressionQuality = 100;
+                setting.maxTextureSize = _maxTextureSize;
+                _importer.filterMode = FilterMode.Bilinear;
+                _importer.npotScale = TextureImporterNPOTScale.None;
+                setting.overridden = true;
+                _importer.SetPlatformTextureSettings(setting);
+                result |= true;
+            }
+            setting = _importer.GetPlatformTextureSettings("iOS");
+            if (setting.format != TextureImporterFormat.ASTC_6x6 ||
+setting.compressionQuality != 100 || setting.maxTextureSize != _maxTextureSize) {
+                setting.crunchedCompression = true;
+                setting.format = TextureImporterFormat.ASTC_6x6;
+                setting.compressionQuality = 100;
+                setting.maxTextureSize = _maxTextureSize;
+                _importer.filterMode = FilterMode.Bilinear;
+                _importer.npotScale = TextureImporterNPOTScale.None;
+                setting.overridden = true;
+                _importer.SetPlatformTextureSettings(setting);
+                result |= true;
+            }
+            setting = _importer.GetPlatformTextureSettings("WebGL");
+            if (setting.format != TextureImporterFormat.ASTC_6x6 ||
+setting.compressionQuality != 100 || setting.maxTextureSize != _maxTextureSize) {
+                setting.crunchedCompression = true;
+                setting.format = TextureImporterFormat.ASTC_6x6;
+                setting.compressionQuality = 100;
+                setting.maxTextureSize = _maxTextureSize;
+                _importer.filterMode = FilterMode.Bilinear;
+                _importer.npotScale = TextureImporterNPOTScale.None;
+                setting.overridden = true;
+                _importer.SetPlatformTextureSettings(setting);
+                result |= true;
+            }
+
+            return result;
         }
 
         static bool SetTextureRGBACrunchedDXT5(TextureImporter _importer, int _maxTextureSize) {

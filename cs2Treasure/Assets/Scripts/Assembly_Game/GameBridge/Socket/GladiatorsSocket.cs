@@ -1,5 +1,5 @@
 using DG.Tweening;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using LitJson;
 using NSubstitute;
 using Scoz.Func;
@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Gladiators.Socket {
-    public partial class GladiatorsSocket {
+namespace cs2Treasure.Socket {
+    public partial class cs2TreasureSocket {
 
-        protected static GladiatorsSocket Instance = null;
-        public static GladiatorsSocket GetInstance() {
+        protected static cs2TreasureSocket Instance = null;
+        public static cs2TreasureSocket GetInstance() {
             if (Instance == null) {
-                Instance = new GladiatorsSocket();
+                Instance = new cs2TreasureSocket();
                 Instance.Init();
             }
             return Instance;

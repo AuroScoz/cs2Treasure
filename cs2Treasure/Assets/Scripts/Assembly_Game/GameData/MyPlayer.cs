@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using SimpleJSON;
-using Gladiators.Main;
+using cs2Treasure.Main;
 
 namespace Scoz.Func {
     public abstract class MyPlayer {

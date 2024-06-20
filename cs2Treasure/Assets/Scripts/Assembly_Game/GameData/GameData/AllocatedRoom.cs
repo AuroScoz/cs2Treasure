@@ -1,8 +1,7 @@
 using Castle.Core.Internal;
 using Cysharp.Threading.Tasks;
-using Gladiators.Battle;
-using Gladiators.Socket;
-using Gladiators.Socket.Matchgame;
+using cs2Treasure.Socket;
+using cs2Treasure.Socket.Matchgame;
 using Scoz.Func;
 using Service.Realms;
 using System.Collections;
@@ -10,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     /// <summary>
     /// 玩家目前所在遊戲房間的資料，CreateRoom後會從Matchmaker回傳取得資料
     /// </summary>
@@ -50,9 +49,6 @@ namespace Gladiators.Main {
         /// Matchmaker派發Matchgame的Pod名稱
         /// </summary>
         public string PodName { get; private set; }
-
-        public DBPlayer EnemyPlayer { get; private set; }
-        public DBGladiator EnemyGladiator { get; private set; }
 
         public enum GameState {
             NotInGame,// 不在遊戲中
@@ -122,32 +118,6 @@ namespace Gladiators.Main {
             var dbPlayer = GamePlayer.Instance.GetDBPlayerDoc<DBPlayer>();
             if (dbPlayer == null) return;
             dbPlayer.SetInMatchgameID(null).Forget();
-        }
-        /// <summary>
-        /// Matchgame驗證完成時執行
-        /// </summary>
-        public void ReceiveAuth() {
-            SetGameState(GameState.Authed);
-            GameConnector.Instance.SetPlayer("660926d4d0b8e0936ddc6afe");
-        }
-        /// <summary>
-        /// 收到雙方玩家資料後, 將目前狀態設定為GotEnemy並通知BattleScene送Ready
-        /// </summary>
-        public void ReceiveSetPlayer(PackPlayer[] _packPlayers) {
-            if (_packPlayers == null || _packPlayers.Length != 2) return;
-            // 取對手資料
-            var myPlayer = GamePlayer.Instance.GetDBPlayerDoc<DBPlayer>();
-            var enemy = _packPlayers.Find(a => a.DBPlayerID != myPlayer.ID);//因為只會有兩個玩家, 不是自己就是敵人
-            if (enemy == null) return;
-            SetGameState(GameState.GotPlayer);
-            BattleManager.Instance.GotEnemy();
-        }
-        /// <summary>
-        /// 收到準備完成, 收到雙方準備完成 就會進入賄賂階段
-        /// </summary>
-        public void ReceiveReady(bool[] _readys) {
-            var allReady = _readys.All(a => a);
-            if (allReady) BattleManager.Instance.GoBribe();
         }
     }
 }

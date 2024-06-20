@@ -10,7 +10,7 @@ using UnityEngine;
 using Scoz.Func;
 using Cysharp.Threading.Tasks;
 
-namespace Gladiators.Socket {
+namespace cs2Treasure.Socket {
     public class TcpClient : MonoBehaviour, INetworkClient {
         public event Action<string> OnReceiveMsg;
 

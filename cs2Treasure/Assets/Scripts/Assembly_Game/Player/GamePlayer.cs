@@ -9,7 +9,7 @@ using Realms;
 using System.Data.SqlTypes;
 using Cysharp.Threading.Tasks;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
 
     public partial class GamePlayer : MyPlayer {
         public new static GamePlayer Instance { get; private set; }

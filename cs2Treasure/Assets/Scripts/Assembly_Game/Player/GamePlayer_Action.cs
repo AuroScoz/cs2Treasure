@@ -5,7 +5,7 @@ using Scoz.Func;
 using System;
 using System.Linq;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
 
     public partial class GamePlayer : MyPlayer {
 

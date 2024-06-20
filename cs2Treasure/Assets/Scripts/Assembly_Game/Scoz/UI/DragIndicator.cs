@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Scoz.Func {

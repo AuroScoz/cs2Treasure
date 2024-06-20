@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Gladiators.Socket.Matchmaker {
+namespace cs2Treasure.Socket.Matchmaker {
     public class CREATEROOM : SocketContent {
         //class名稱就是封包的CMD名稱
 

@@ -7,7 +7,7 @@ using System.Linq;
 using LitJson;
 using SimpleJSON;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
 
     public partial class GamePlayer : MyPlayer {
 

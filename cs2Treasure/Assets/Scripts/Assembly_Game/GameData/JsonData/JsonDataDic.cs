@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using System.Linq;
 using System.Reflection;
 

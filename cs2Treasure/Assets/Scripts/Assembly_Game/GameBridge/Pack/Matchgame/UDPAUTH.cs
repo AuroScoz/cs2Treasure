@@ -1,4 +1,4 @@
-﻿namespace Gladiators.Socket.Matchgame {
+﻿namespace cs2Treasure.Socket.Matchgame {
     public class UDPAUTH : SocketContent {
 
     }

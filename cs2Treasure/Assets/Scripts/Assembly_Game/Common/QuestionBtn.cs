@@ -2,7 +2,7 @@ using Scoz.Func;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class QuestionBtn : MonoBehaviour {
         /// <summary>
         /// 開啟遊戲內文字說明

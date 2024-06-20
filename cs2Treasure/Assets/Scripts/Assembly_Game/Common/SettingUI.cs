@@ -4,7 +4,7 @@ using UnityEngine;
 using Scoz.Func;
 using UnityEngine.UI;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class SettingUI : BaseUI {
         [SerializeField] Slider MusicSlider = null;
         [SerializeField] Slider SoundSlider = null;

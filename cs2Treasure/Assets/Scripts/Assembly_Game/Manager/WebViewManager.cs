@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using Scoz.Func;
 using System.Collections.Generic;
 using UnityEngine.AddressableAssets;

@@ -10,7 +10,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
 using System.Text;
-using Gladiators.Socket;
+using cs2Treasure.Socket;
 
 namespace Service.Realms {
     public static partial class RealmManager {
@@ -114,9 +114,6 @@ namespace Service.Realms {
                         //可以使用 string-based query syntax  可以參考官方文件: https://www.mongodb.com/docs/realm/realm-query-language/#collection-operators
                         //string-based query syntax 範例 var dbMatchgames  = realm.All<DBMatchgame>().Filter("ANY PlayerIDs == $0", myUserId);
 
-                        //註冊Map資料
-                        var dbMaps = realm.All<DBMap>();
-                        realm.Subscriptions.Add(dbMaps, new SubscriptionOptions() { Name = "Map" });
                         //註冊玩家自己的player資料
                         var dbPlayer = realm.All<DBPlayer>().Where(i => i.ID == MyApp.CurrentUser.Id);
                         realm.Subscriptions.Add(dbPlayer, new SubscriptionOptions() { Name = "MyPlayer" });

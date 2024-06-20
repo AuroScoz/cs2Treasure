@@ -6,7 +6,7 @@ using LitJson;
 using System;
 using System.Linq;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class JsonSceneTransition : JsonBase {
         public static string DataName { get; set; }
         public string Description {

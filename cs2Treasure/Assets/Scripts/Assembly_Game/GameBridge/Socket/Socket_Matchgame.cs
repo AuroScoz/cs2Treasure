@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
-using Gladiators.Battle;
-using Gladiators.Main;
-using Gladiators.Socket.Matchgame;
+using cs2Treasure.Main;
+using cs2Treasure.Socket.Matchgame;
 using LitJson;
 using Scoz.Func;
 using System;
@@ -11,8 +10,8 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Gladiators.Socket {
-    public partial class GladiatorsSocket {
+namespace cs2Treasure.Socket {
+    public partial class cs2TreasureSocket {
         TcpClient TCP_MatchgameClient;
         UdpSocket UDP_MatchgameClient;
         ServerTimeSyncer TimeSyncer;
@@ -199,14 +198,6 @@ namespace Gladiators.Socket {
                         var authPacket = LitJson.JsonMapper.ToObject<SocketCMD<AUTH_TOCLIENT>>(_msg);
                         HandleAuth(authPacket);
                         break;
-                    case SocketContent.MatchgameCMD_TCP.SETPLAYER_TOCLIENT:
-                        var setPlayerPacket = LitJson.JsonMapper.ToObject<SocketCMD<SETPLAYER_TOCLIENT>>(_msg);
-                        HandleSetPlayer(setPlayerPacket);
-                        break;
-                    case SocketContent.MatchgameCMD_TCP.READY_TOCLIENT:
-                        var readyPacket = LitJson.JsonMapper.ToObject<SocketCMD<READY_TOCLIENT>>(_msg);
-                        HandleReady(readyPacket);
-                        break;
                     default:
                         WriteLog.LogErrorFormat("收到尚未定義的命令類型: {0}", cmdType);
                         break;
@@ -225,15 +216,6 @@ namespace Gladiators.Socket {
                 WriteLog.LogError("Auth錯誤 遊戲無法開始");
                 return;
             }
-            AllocatedRoom.Instance.ReceiveAuth();
-        }
-        void HandleSetPlayer(SocketCMD<SETPLAYER_TOCLIENT> _packet) {
-            //if (SceneManager.GetActiveScene().name != MyScene.BattleScene.ToString()) return;
-            AllocatedRoom.Instance.ReceiveSetPlayer(_packet.Content.Players);
-        }
-        void HandleReady(SocketCMD<READY_TOCLIENT> _packet) {
-            if (SceneManager.GetActiveScene().name != MyScene.BattleScene.ToString()) return;
-            AllocatedRoom.Instance.ReceiveReady(_packet.Content.PlayerReadies);
         }
 
     }

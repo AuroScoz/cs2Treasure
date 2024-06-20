@@ -72,7 +72,7 @@ class PostprocessBuild : IPostprocessBuildWithReport {
             //設定名稱
             propertyList.root.SetString(
             "CFBundleDisplayName",
-            "麻將柏青哥");
+            "Mirror Matchup");
             //設定追蹤資料說明
             propertyList.root.SetString(
             "NSUserTrackingUsageDescription",

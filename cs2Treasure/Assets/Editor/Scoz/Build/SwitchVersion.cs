@@ -45,22 +45,22 @@ namespace Scoz.Editor {
         //};
 
         static Dictionary<EnvVersion, string> KEYSTORE_ALIAS_DIC = new Dictionary<EnvVersion, string>() {
-            { EnvVersion.Dev, "gladiators"},
-            { EnvVersion.Test, "gladiators"},
-            { EnvVersion.Release, "gladiators"},
+            { EnvVersion.Dev, "123456"},
+            { EnvVersion.Test, "123456"},
+            { EnvVersion.Release, "herofishing"},
         };
 
         static Dictionary<EnvVersion, string> PACKAGE_NAME_DIC = new Dictionary<EnvVersion, string>() {
-            { EnvVersion.Dev, "com.pixies.gladiators"},
-            { EnvVersion.Test, "com.pixies.gladiators"},
-            { EnvVersion.Release, "com.pixies.gladiators"},
+            { EnvVersion.Dev, "com.aura.herofishingdev"},
+            { EnvVersion.Test, "com.aura.herofishingtest"},
+            { EnvVersion.Release, "com.aura.herofishingrelease"},
         };
 
 
 
-        [MenuItem("Scoz/SwitchVersion/Dev")]
+        [MenuItem("Scoz/SwitchVersion/1. Dev")]
         public static void SwitchToDev() {
-            bool isYes = EditorUtility.DisplayDialog("切換環境版本", "切換版本至 " + EnvVersion.Dev.ToString(), "切切切!", "先不要><");
+            bool isYes = EditorUtility.DisplayDialog("切換環境版本", "切換版本至 " + EnvVersion.Dev.ToString(), "切!", "不好😔");
             if (isYes) {
                 RunSwitchVersion(EnvVersion.Dev, result => {
                     if (result) {
@@ -72,9 +72,9 @@ namespace Scoz.Editor {
 
             }
         }
-        [MenuItem("Scoz/SwitchVersion/Test")]
+        [MenuItem("Scoz/SwitchVersion/2. Test")]
         public static void SwitchToTest() {
-            bool isYes = EditorUtility.DisplayDialog("切換版本", "切換版本至 " + EnvVersion.Test.ToString(), "切切切!", "先不要><");
+            bool isYes = EditorUtility.DisplayDialog("切換版本", "切換版本至 " + EnvVersion.Test.ToString(), "切!", "不好😔");
             if (isYes) {
                 RunSwitchVersion(EnvVersion.Test, result => {
                     if (result) {
@@ -85,10 +85,11 @@ namespace Scoz.Editor {
                 });
             }
         }
-        [MenuItem("Scoz/SwitchVersion/Release")]
+        [MenuItem("Scoz/SwitchVersion/3. Release")]
         public static void SwitchToRelease() {
-            bool isYes = EditorUtility.DisplayDialog("切換版本", "切換版本至 " + EnvVersion.Release.ToString(), "切切切!", "先不要><");
+            bool isYes = EditorUtility.DisplayDialog("切換版本", "切換版本至 " + EnvVersion.Release.ToString(), "切!", "不好😔");
             if (isYes) {
+                isYes = EditorUtility.DisplayDialog("最後警告", "真的要切到版本!!!!!!!!!!!!!!!!! " + EnvVersion.Release.ToString(), "不要怕!", "不好😱");
                 RunSwitchVersion(EnvVersion.Release, result => {
                     if (result) {
                         WriteLog.Log(string.Format("<color=#8cff3f>切換版本 {0} 完成</color>", EnvVersion.Release));

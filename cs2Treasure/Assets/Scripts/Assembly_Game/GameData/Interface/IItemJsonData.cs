@@ -5,7 +5,7 @@ using Scoz.Func;
 using UnityEngine.UI;
 using System;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     /// <summary>
     /// 玩家會獲得的道具類除了貨幣(Gold,Point,Ball...)與寶箱(ItemGroup)都的JsonData都會繼承這個介面
     /// </summary>

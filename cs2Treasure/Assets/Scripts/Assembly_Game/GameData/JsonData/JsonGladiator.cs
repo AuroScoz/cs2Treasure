@@ -8,7 +8,7 @@ using System.Linq;
 using SimpleJSON;
 using System.Reflection;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class JsonGladiator : JsonBase {
         public static string DataName { get; set; }
         public string Name {

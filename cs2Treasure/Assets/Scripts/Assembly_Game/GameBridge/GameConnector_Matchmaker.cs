@@ -1,12 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
-using Gladiators.Main;
-using Gladiators.Socket.Matchmaker;
+using cs2Treasure.Main;
+using cs2Treasure.Socket.Matchmaker;
 using Scoz.Func;
 using Service.Realms;
 using System;
 using UnityEngine;
 
-namespace Gladiators.Socket {
+namespace cs2Treasure.Socket {
     public partial class GameConnector : MonoBehaviour {
         int CurRetryTimes = 0; //目前重試次數
         string TmpDBMapID;//暫時紀錄要建立或加入的DBMapID

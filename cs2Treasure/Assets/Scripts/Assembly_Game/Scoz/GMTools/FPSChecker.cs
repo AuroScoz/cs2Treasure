@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Numerics;
 using UnityEngine.Profiling;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using UnityEngine.SceneManagement;
 
 namespace Scoz.Func {

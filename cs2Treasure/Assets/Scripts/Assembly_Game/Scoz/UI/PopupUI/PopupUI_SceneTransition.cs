@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using System;
 
 namespace Scoz.Func {

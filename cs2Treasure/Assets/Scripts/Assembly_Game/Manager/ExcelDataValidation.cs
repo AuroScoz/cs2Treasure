@@ -7,7 +7,7 @@ using System;
 using Scoz.Func;
 using System.Linq;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class ExcelDataValidation {
         public static void CheckDatas() {
         }

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Gladiators.Socket {
+namespace cs2Treasure.Socket {
     /// <summary>
     /// Socket封包
     /// </summary>

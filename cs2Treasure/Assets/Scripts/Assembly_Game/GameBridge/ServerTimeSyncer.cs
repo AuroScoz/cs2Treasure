@@ -2,7 +2,7 @@
 using UnityEngine;
 using Scoz.Func;
 
-namespace Gladiators.Socket {
+namespace cs2Treasure.Socket {
     public class ServerTimeSyncer : MonoBehaviour {
         private const float SERVER_UPDATE_TIME = 1.0f;
         private float serverTime = 0;

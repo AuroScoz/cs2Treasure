@@ -38,11 +38,11 @@ namespace Service.Realms {
         public
         //環境版本對應Realm App ID
         static Dictionary<EnvVersion, string> REALM_APPID_DIC = new Dictionary<EnvVersion, string>() {
-            { EnvVersion.Dev, "gladiators-pirlo"},
-            { EnvVersion.Test, "gladiators-pirlo"},
-            { EnvVersion.Release, "gladiators-pirlo"},
+            { EnvVersion.Dev, "cs2Treasure-pirlo"},
+            { EnvVersion.Test, "cs2Treasure-pirlo"},
+            { EnvVersion.Release, "cs2Treasure-pirlo"},
         };
-        public static string DBName { get; private set; } = "gladiators";
+        public static string DBName { get; private set; } = "cs2Treasure";
         public static App MyApp { get; private set; }
         public static Realm MyRealm { get; private set; }
         public static MongoClient MyClient { get; private set; }

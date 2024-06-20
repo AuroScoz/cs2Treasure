@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 using Scoz.Func;
-using Gladiators.Socket.Matchmaker;
-using Gladiators.Socket.Matchgame;
+using cs2Treasure.Socket.Matchmaker;
+using cs2Treasure.Socket.Matchgame;
 using Service.Realms;
 
-namespace Gladiators.Socket {
+namespace cs2Treasure.Socket {
     public class UdpSocket : MonoBehaviour, INetworkClient {
         private const float CONNECTION_CLOSE_TIME = 5.0f; // 設定X秒沒收到封包就斷線
         public event Action<string> OnReceiveMsg;

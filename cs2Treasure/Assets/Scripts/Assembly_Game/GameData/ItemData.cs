@@ -6,7 +6,7 @@ using LitJson;
 using System;
 using System.Linq;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     /// <summary>
     /// 物品類型
     /// </summary>

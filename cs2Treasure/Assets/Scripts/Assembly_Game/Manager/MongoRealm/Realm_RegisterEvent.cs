@@ -1,5 +1,5 @@
-using Gladiators.Main;
-using Gladiators.Socket;
+using cs2Treasure.Main;
+using cs2Treasure.Socket;
 using Realms;
 using Realms.Sync;
 using Scoz.Func;
@@ -88,7 +88,6 @@ namespace Service.Realms {
             WriteLog.LogColor("註冊MongoDB異動事件", WriteLog.LogType.Realm);
             RegisterPropertyChanges_MyPlayer();
             RegisterPropertyChanges_GameSetting();
-            RegisterPropertyChanges_Map();
             DeviceManager.AddOnApplicationQuitAction(UnregisterAllRealmEvents);
         }
 
@@ -160,25 +159,6 @@ namespace Service.Realms {
         //    Registers.Add("DBMatchgame", token_dbMatchgames);
         //}
 
-        /// <summary>
-        /// 註冊Map資料異動通知
-        /// </summary>
-        static void RegisterPropertyChanges_Map() {
-            var dbMaps = MyRealm.All<DBMap>();
-            var token_dbMaps = dbMaps.SubscribeForNotifications((sender, changes) => {
-                //※官方提到要按刪除->插入->修改的順序處理文件避免意外的錯誤發生
-
-                //第一次註冊通知事件時觸發
-                if (changes == null) {
-                    return;
-                }
-
-                //var mapUI = MapUI.GetInstance<MapUI>();
-                //if (mapUI != null && mapUI.gameObject.activeInHierarchy) mapUI.SpawnItems();
-
-            });
-            Registers.Add("DBMap", token_dbMaps);
-        }
 
     }
 }

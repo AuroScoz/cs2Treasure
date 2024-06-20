@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
-using Gladiators.Main;
-using Gladiators.Socket.Matchmaker;
+using cs2Treasure.Main;
+using cs2Treasure.Socket.Matchmaker;
 using LitJson;
 using NSubstitute;
 using Scoz.Func;
@@ -11,8 +11,8 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Gladiators.Socket {
-    public partial class GladiatorsSocket {
+namespace cs2Treasure.Socket {
+    public partial class cs2TreasureSocket {
 
         TcpClient TCP_MatchmakerClient;
 

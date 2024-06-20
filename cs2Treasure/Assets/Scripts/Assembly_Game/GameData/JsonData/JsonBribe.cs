@@ -2,7 +2,7 @@ using Scoz.Func;
 using LitJson;
 using System.Reflection;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class JsonBribe : JsonBase {
         public static string DataName { get; set; }
         public string Name {

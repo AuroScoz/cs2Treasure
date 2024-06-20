@@ -9,32 +9,35 @@ namespace Scoz.Editor {
     public class UploadBundle {
         const string DIALOG_MESSAGE = "上傳資源包到Google Storage，請確認以下：\n\n1. 已安裝GoogleCloud工具，並完成初始化\n2. 已加入環境變數\n3. 已登入有權限的帳號\n\n環境: {0}\nBundle包版號: {1}\n";
         static Dictionary<EnvVersion, string> GOOGLE_PROJECT_DIC = new Dictionary<EnvVersion, string>() {
-            { EnvVersion.Dev, "gladiators-dev"},
-            { EnvVersion.Test, "gladiators-test"},
-            { EnvVersion.Release, "gladiators-release"},
+            { EnvVersion.Dev, "herofishing-dev"},
+            { EnvVersion.Test, "herofishing-test"},
+            { EnvVersion.Release, "herofishing-release"},
         };
         public static Dictionary<EnvVersion, string> GOOGLE_STORAGE_PATH_DIC = new Dictionary<EnvVersion, string>() {
-            { EnvVersion.Dev, "gladiators_bundle_dev"},
-            { EnvVersion.Test, "gladiators_bundle_test"},
-            { EnvVersion.Release, "gladiators_bundle_release"},
+            { EnvVersion.Dev, "herofishing_bundle_dev"},
+            { EnvVersion.Test, "herofishing_bundle_test"},
+            { EnvVersion.Release, "herofishing_bundle_release"},
         };
-        [MenuItem("Scoz/UploadBundle/Dev")]
+        [MenuItem("Scoz/UploadBundle/1. Dev")]
         public static void UploadBundleToDev() {
-            bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Dev", VersionSetting.AppLargeVersion), "好!", "先不要><");
+            bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Dev", VersionSetting.AppLargeVersion), "好!", "住手!😔");
             if (isYes)
                 UploadGoogleCloud(EnvVersion.Dev);
         }
-        [MenuItem("Scoz/UploadBundle/Test")]
+        [MenuItem("Scoz/UploadBundle/2. Test")]
         public static void UploadBundleToTest() {
-            bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Test", VersionSetting.AppLargeVersion), "好!", "先不要><");
+            bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Test", VersionSetting.AppLargeVersion), "好!", "住手!😔");
             if (isYes)
                 UploadGoogleCloud(EnvVersion.Test);
         }
-        [MenuItem("Scoz/UploadBundle/Release")]
+        [MenuItem("Scoz/UploadBundle/3. Release")]
         public static void UploadBundleToRelease() {
-            bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Release", VersionSetting.AppLargeVersion), "好!", "先不要><");
-            if (isYes)
-                UploadGoogleCloud(EnvVersion.Release);
+            bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Release", VersionSetting.AppLargeVersion), "好!", "住手!😔");
+            if (isYes) {
+                isYes = EditorUtility.DisplayDialog("這是Release版本, 我勸你多想想!", string.Format(DIALOG_MESSAGE, "Release", VersionSetting.AppLargeVersion), "怕三小!", "住手!😔");
+                if (isYes) UploadGoogleCloud(EnvVersion.Release);
+            }
+
         }
 
         static void UploadGoogleCloud(EnvVersion _envVersion) {
@@ -86,14 +89,13 @@ namespace Scoz.Editor {
             process.StartInfo.WorkingDirectory = "./";
 #elif UNITY_EDITOR_OSX
         string fileName = "UploadBundle.sh";
-        process.Start();
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.CreateNoWindow = true;
         process.StartInfo.RedirectStandardOutput = true;
         process.StartInfo.RedirectStandardError = true;
         process.StartInfo.StandardOutputEncoding = System.Text.Encoding.UTF8;
         process.StartInfo.StandardErrorEncoding = System.Text.Encoding.UTF8;
-        process.StartInfo.FileName = "/bin/sh";
+        process.StartInfo.FileName = fileName;
         process.StartInfo.Arguments = Application.dataPath + string.Format("/../{0} {1} {2} {3}",fileName, googleProjectID, storagePath, VersionSetting.AppLargeVersion);
         process.StartInfo.WorkingDirectory = "./";
 #endif

@@ -5,7 +5,7 @@ using System;
 using LitJson;
 using System.Linq;
 using UnityEngine.AddressableAssets;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using System.Reflection;
 
 namespace Scoz.Func {

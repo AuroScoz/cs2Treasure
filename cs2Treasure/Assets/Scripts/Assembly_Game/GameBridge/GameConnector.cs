@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using Newtonsoft.Json.Linq;
 using Scoz.Func;
 using Service.Realms;
@@ -13,7 +13,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Gladiators.Socket {
+namespace cs2Treasure.Socket {
     public partial class GameConnector : MonoBehaviour {
         public static GameConnector Instance = null;
 
@@ -22,7 +22,7 @@ namespace Gladiators.Socket {
         const float RETRY_INTERVAL_SECS = 3.0f; //重連間隔時間
         const int MAX_RETRY_TIMES = 1; //最大重連次數
         const float CONNECT_TIMEOUT_SECS = 60.0f; //連線超時時間60秒
-        GladiatorsSocket Socket => GladiatorsSocket.GetInstance();
+        cs2TreasureSocket Socket => cs2TreasureSocket.GetInstance();
 
         #endregion
 

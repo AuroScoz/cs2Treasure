@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
-using Gladiators.Main;
-using Gladiators.Socket.Matchgame;
+using cs2Treasure.Main;
+using cs2Treasure.Socket.Matchgame;
 using Newtonsoft.Json.Linq;
 using Scoz.Func;
 using Service.Realms;
@@ -13,7 +13,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Gladiators.Socket {
+namespace cs2Treasure.Socket {
     public partial class GameConnector : MonoBehaviour {
 
 

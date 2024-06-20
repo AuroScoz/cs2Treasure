@@ -5,7 +5,7 @@ using System;
 using Unity.Entities.UniversalDelegates;
 
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public enum EffectType {
         Attack,//傷害
         RestoreHP,//生命

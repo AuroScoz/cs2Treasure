@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using Gladiators.Main;
+using cs2Treasure.Main;
 using UnityEngine.AddressableAssets;
 
 namespace Scoz.Func {
@@ -394,7 +394,7 @@ namespace Scoz.Func {
         //進遊戲不先初始化，等到要用時才初始化UI
         [SerializeField] Transform SettingUIParent;
         [SerializeField] AssetReference SettingUIAsset;
-        Gladiators.Main.SettingUI MySettingUI;
+        cs2Treasure.Main.SettingUI MySettingUI;
 
         void InitSettingUI(Action _ac) {
             PopupUI.ShowLoading(JsonString.GetUIString("WaitForLoadingUI"));
@@ -408,7 +408,7 @@ namespace Scoz.Func {
                 //RectTransform rect = go.GetComponent<RectTransform>();
                 //rect.offsetMin = Vector2.zero;//Left、Bottom
                 //rect.offsetMax = Vector2.zero;//Right、Top
-                Instance.MySettingUI = go.GetComponent<Gladiators.Main.SettingUI>();
+                Instance.MySettingUI = go.GetComponent<cs2Treasure.Main.SettingUI>();
                 Instance.MySettingUI.Init();
                 Instance.MySettingUI.SetActive(false);
                 _ac?.Invoke();

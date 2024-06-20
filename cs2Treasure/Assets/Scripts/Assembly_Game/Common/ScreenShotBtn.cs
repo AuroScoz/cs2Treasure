@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class ScreenShotBtn : MonoBehaviour {
 
         static ScreenCaptureCam MyCam;
