@@ -8,12 +8,7 @@ using UnityEngine.UI;
 namespace cs2Treasure.Main {
 
     public enum Bet {
-        Bet1 = 1,
-        Bet3 = 3,
-        Bet5 = 5,
         Bet10 = 10,
-        Bet15 = 15,
-        Bet20 = 20,
         Bet30 = 30,
         Bet50 = 50,
         Bet100 = 100,
@@ -27,9 +22,9 @@ namespace cs2Treasure.Main {
         [SerializeField] Animator Ani_AddPT;
         [SerializeField] PointRewardEffect MyPointRewardEffect;
 
-        int playerPT = 1000;
+        float playerPT = 1000;
 
-        Bet CurBet = Bet.Bet1;
+        Bet CurBet = Bet.Bet10;
 
         private void Start() {
             Init();
@@ -39,9 +34,9 @@ namespace cs2Treasure.Main {
             RefreshUI();
         }
         void RefreshUI() {
-            Text_PlayerPT.text = playerPT.ToString();
+            Text_PlayerPT.text = playerPT.ToString("0.0");
         }
-        void AddPlayerPT(int _value) {
+        void AddPlayerPT(float _value) {
             if (_value == 0) return;
             playerPT += _value;
             string aniTrigger = "add";
@@ -73,8 +68,8 @@ namespace cs2Treasure.Main {
         }
 
         int BetToCaseIdx() {
-            if ((int)CurBet <= 5) return 0;
-            else if ((int)CurBet <= 20) return 1;
+            if ((int)CurBet <= 30) return 0;
+            else if ((int)CurBet <= 50) return 1;
             return 2;
         }
 
@@ -87,8 +82,8 @@ namespace cs2Treasure.Main {
         public void AutoPlayClick() {
 
         }
-        int ResultOdds;
-        public void SetResult(int _odds) {
+        float ResultOdds;
+        public void SetResult(float _odds) {
             ResultOdds = _odds;
         }
         public void ShowResult() {

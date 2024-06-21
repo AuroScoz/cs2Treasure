@@ -9,6 +9,8 @@ using UnityEngine.UI;
 using static Codice.CM.Common.CmCallContext;
 
 namespace cs2Treasure.Main {
+
+
     public class WeaponScroller : BaseUI {
         [SerializeField] RectTransform ParentTrans;
         [SerializeField] WeaponItem[] WeaponItems;
@@ -17,8 +19,6 @@ namespace cs2Treasure.Main {
         [SerializeField] Animator TargetFrameAni;
         [SerializeField] float ItemDist = 550;
         Transform[] WeaponTrans;
-
-
 
 
         public override void RefreshText() {
@@ -46,14 +46,15 @@ namespace cs2Treasure.Main {
             for (int i = 0; i < WeaponItems.Length; i++) {
                 WeaponTrans[i] = WeaponItems[i].GetComponent<Transform>();
             }
+            WriteLog.Log("WeaponTrans=" + WeaponTrans.Length);
             TotalLength = WeaponTrans.Length * 550;
             ResetScroller();
         }
 
 
-        public void Play(string[] _refSymbols, int _winIdx) {
+        public void Play(WeaponItemData[] _datas, int _winIdx) {
             SetActive(true);
-            SetSymbols(_refSymbols);
+            SetSymbols(_datas);
             UniTask.Void(async () => {
                 Spin();
                 await UniTask.Delay(ResultDelayMiliSec);
@@ -62,11 +63,14 @@ namespace cs2Treasure.Main {
 
         }
 
-        void SetSymbols(string[] _symbols) {
+        void SetSymbols(WeaponItemData[] _datas) {
             try {
                 AddressablesLoader.GetSpriteAtlas("Weapon", atlas => {
                     for (int i = 0; i < WeaponTrans.Length; i++) {
-                        WeaponItems[i].SetImg(atlas.GetSprite(_symbols[i]));
+                        string oddsText = _datas[i].SymbolOdds + "倍";
+                        Sprite sprite = null;
+                        if (_datas[i].SymbolText != "") sprite = atlas.GetSprite(_datas[i].SymbolText);
+                        WeaponItems[i].SetItem(sprite, oddsText);
                     }
                 });
             } catch {

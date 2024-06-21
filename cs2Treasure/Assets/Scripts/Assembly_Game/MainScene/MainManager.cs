@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 using Cysharp.Threading.Tasks;
 using Cinemachine;
 using cs2Treasure.Socket;
+using Gladiators.Main;
 
 namespace cs2Treasure.Main {
     public class MainManager : MonoBehaviour {
@@ -52,11 +53,21 @@ namespace cs2Treasure.Main {
             Cases[_lv].transform.rotation = Quaternion.Euler(rndRot);
             await UniTask.Delay(1500);
             Particle_Flash.gameObject.SetActive(true);
-            var refSymbols = new string[6] { "AK47", "AWP", "DesertEagle", "M4A1", "NOVA", "P250" };
-            int rndIdx = UnityEngine.Random.Range(0, refSymbols.Length);
+            var refSymbols = new string[8] { "", "AK47", "AWP", "DesertEagle", "M4A1", "NOVA", "P250", "AK47" };
+            var odds = new float[8] { 0, 0.5f, 1, 2, 3, 4, 5, 6 };
+            var weights = new int[8] { 39800, 27000, 13500, 6800, 4500, 3400, 2700, 2300 };
+            WeaponItemData[] datas = new WeaponItemData[refSymbols.Length];
+            List<MathModel.Item> items = new List<MathModel.Item>();
+            for (int i = 0; i < datas.Length; i++) {
+                MathModel.Item item = new MathModel.Item(i, odds[i], weights[i]);
+                items.Add(item);
+                datas[i] = new WeaponItemData(refSymbols[i], odds[i]);
+            }
+            MathModel.SetItems(items);
+            var resultItem = MathModel.GetResult();
             await UniTask.Delay(200);
-            WeaponScroller.GetInstance<WeaponScroller>()?.Play(refSymbols, rndIdx);
-            MainUI.GetInstance<MainUI>().SetResult(rndIdx + 1);
+            WeaponScroller.GetInstance<WeaponScroller>()?.Play(datas, resultItem.Idx);
+            MainUI.GetInstance<MainUI>().SetResult(resultItem.Odds);
 
         }
 
