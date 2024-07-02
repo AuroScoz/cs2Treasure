@@ -4,41 +4,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace cs2Treasure.Main {
+    public class PlayerControllUI : BaseUI {
 
-    public enum Bet {
-        Bet10 = 10,
-        Bet30 = 30,
-        Bet50 = 50,
-        Bet100 = 100,
-    }
-
-    public class MainUI : BaseUI {
         [SerializeField] Dropdown BetDropDown;
-        [SerializeField] WeaponScroller MyWeaponScroller;
         [SerializeField] Text Text_PlayerPT;
         [SerializeField] Text Text_AddPT;
         [SerializeField] Animator Ani_AddPT;
-        [SerializeField] PointRewardEffect MyPointRewardEffect;
 
-        float playerPT = 1000;
+        public enum Bet {
+            Bet10 = 10,
+            Bet20 = 20,
+            Bet30 = 30,
+            Bet50 = 50,
+            Bet100 = 100,
+        }
 
         Bet CurBet = Bet.Bet10;
 
-        private void Start() {
-            Init();
-            MyPointRewardEffect.Init();
-            MyWeaponScroller.Init();
-            MyWeaponScroller.SetActive(false);
-            RefreshUI();
+        protected override void OnEnable() {
+            base.OnEnable();
         }
-        void RefreshUI() {
-            Text_PlayerPT.text = playerPT.ToString("0.0");
+
+        public override void RefreshText() {
+            Text_PlayerPT.text = GamePlayer.Instance.Pt.ToString();
         }
-        void AddPlayerPT(float _value) {
+
+        public override void Init() {
+            base.Init();
+            SetBetDropDown();
+        }
+
+        void AddPlayerPT(int _value) {
             if (_value == 0) return;
-            playerPT += _value;
             string aniTrigger = "add";
             if (_value < 0) {
                 aniTrigger = "reduce";
@@ -46,11 +44,7 @@ namespace cs2Treasure.Main {
             Ani_AddPT.SetTrigger(aniTrigger);
             if (_value > 0) Text_AddPT.text = "+" + _value.ToString();
             else Text_AddPT.text = _value.ToString();
-        }
-
-        public override void Init() {
-            base.Init();
-            SetBetDropDown();
+            RefreshText();
         }
         void SetBetDropDown() {
             BetDropDown.ClearOptions();
@@ -74,10 +68,9 @@ namespace cs2Treasure.Main {
         }
 
         public void OnPlayClick() {
-            MyWeaponScroller.SetActive(false);
+            WeaponScroller.GetInstance<WeaponScroller>().SetActive(false);
             AddPlayerPT(-(int)CurBet);
             MainManager.Instance.DropCase(BetToCaseIdx());
-            RefreshUI();
         }
         public void AutoPlayClick() {
 
@@ -90,14 +83,9 @@ namespace cs2Treasure.Main {
             UniTask.Void(async () => {
                 //MyPointRewardEffect.PlayReward(ResultOdds);
                 await UniTask.Delay(500);
-                AddPlayerPT(ResultOdds * (int)CurBet);
-                RefreshUI();
+                AddPlayerPT(Mathf.RoundToInt(ResultOdds * (float)CurBet));
+                RefreshText();
             });
-
-        }
-
-        public override void RefreshText() {
-
         }
     }
 }

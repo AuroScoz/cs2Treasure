@@ -29,6 +29,29 @@ namespace Scoz.Func {
             WriteLog.LogWarning("權重取得器錯誤");
             return _weigthList.Count - 1;
         }
+        public static T GetRndTKeyFromWeightDic<T>(Dictionary<T, int> _dic) {
+            if (_dic == null || _dic.Count == 0) {
+                WriteLog.LogError("GetRndTKeyFromWeightDic的傳入Dic為空");
+                return default(T);
+            }
+            int totalWeight = 0;
+            foreach (var item in _dic) {
+                totalWeight += item.Value;
+            }
+
+            int randomIndex = UnityEngine.Random.Range(0, totalWeight);
+            int cumulativeWeight = 0;
+
+            foreach (var item in _dic) {
+                cumulativeWeight += item.Value;
+                if (randomIndex < cumulativeWeight) {
+                    return item.Key;
+                }
+            }
+
+            WriteLog.LogError("GetRndTKeyFromWeightDic傳入資料錯誤");
+            return default(T);
+        }
         /// <summary>
         /// 傳入ID陣列與權重陣列取得ID陣列索引
         /// </summary>

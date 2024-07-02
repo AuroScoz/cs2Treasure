@@ -10,7 +10,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
-namespace Gladiators.Main {
+namespace cs2Treasure.Main {
     public class BaseManager : MonoBehaviour {
         [SerializeField] AssetReference GameManagerAsset;
         public static BaseManager Instance { get; private set; }
@@ -65,15 +65,11 @@ namespace Gladiators.Main {
 
             var myScene = MyEnum_UnityAssembly.ParseEnum<MyScene>(SceneManager.GetActiveScene().name);
             switch (myScene) {
-                case MyScene.StartScene:
+                case MyScene.MainScene:
                     //建立Popup_Local
                     PopupUI_Local.CreateNewInstance();
                     //建立InternetChecker
                     gameObject.AddComponent<InternetChecker_UnityAssembly>().Init();
-                    break;
-                case MyScene.LobbyScene:
-                    break;
-                case MyScene.BattleScene:
                     break;
             }
         }

@@ -103,17 +103,9 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   MySceneUIAssetDic:
-    m_keys: 000000000100000002000000
+    m_keys: 00000000
     m_values:
-    - m_AssetGUID: aa3e6eca2b9bbe1468c215fb8228c67a
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-    - m_AssetGUID: e8e4cb3078f36654989cce99737ddb11
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-    - m_AssetGUID: 47f3571aae87a674d94dae49d7212105
+    - m_AssetGUID: 43d370ba510e5434ca1d976743aaa9ff
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0

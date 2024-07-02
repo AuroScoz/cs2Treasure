@@ -4,6 +4,7 @@ using System;
 using cs2Treasure.Main;
 using System.Linq;
 using System.Reflection;
+using cs2Treasure.Main;
 
 namespace Scoz.Func {
 
@@ -49,10 +50,7 @@ namespace Scoz.Func {
 
             JsonBase.SetDataStringKey_Remote<JsonGameSetting>(SetDic);
             JsonBase.SetData_Remote<JsonSceneTransition>(SetDic);
-            JsonBase.SetData_Remote<JsonGladiator>(SetDic);
-            JsonBase.SetData_Remote<JsonSkill>(SetDic);
-            JsonBase.SetData_Remote<JsonBribe>(SetDic);
-            JsonBase.SetDataStringKey_Remote<JsonSkillEffect>(SetDic);
+            JsonBase.SetData_Remote<JsonPayTable>(SetDic);
 
             //設定X秒會顯示尚未載入的JsonData
             CoroutineJob.Instance.StartNewAction(ShowUnLoadedJsondata, 5);

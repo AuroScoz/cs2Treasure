@@ -12,7 +12,7 @@ using Unity.EditorCoroutines.Editor;
 namespace Scoz.Editor {
     public class BuildCommand {
 
-        private static string[] BuildScenes = { "Assets/Scenes/StartScene.unity", "Assets/Scenes/LobbyScene.unity", "Assets/Scenes/AdventrueScene.unity" };
+        private static string[] BuildScenes = { "Assets/Scenes/MainScene.unity" };
         private static string ANDROID_MANIFEST_PATH = "Assets/Plugins/Android/AndroidManifest.xml";
         static object owner = new System.Object();
 
@@ -83,7 +83,7 @@ namespace Scoz.Editor {
         }
 
         public static void BuildBundleWithArg() {
-            EditorSceneManager.OpenScene($"Assets/Scenes/" + MyScene.StartScene.ToString() + ".unity");
+            EditorSceneManager.OpenScene($"Assets/Scenes/" + MyScene.MainScene.ToString() + ".unity");
             string[] args = System.Environment.GetCommandLineArgs();
             EnvVersion envVersion = EnvVersion.Dev;
             string version = "";
@@ -124,7 +124,7 @@ namespace Scoz.Editor {
         //        }
 
         public static void UpdateBundleWithArg() {
-            EditorSceneManager.OpenScene($"Assets/Scenes/" + MyScene.StartScene.ToString() + ".unity");
+            EditorSceneManager.OpenScene($"Assets/Scenes/" + MyScene.MainScene.ToString() + ".unity");
             string[] args = System.Environment.GetCommandLineArgs();
             EnvVersion envVersion = EnvVersion.Dev;
             string version = "";

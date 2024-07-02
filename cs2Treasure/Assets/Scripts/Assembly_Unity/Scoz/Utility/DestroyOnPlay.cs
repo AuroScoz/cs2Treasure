@@ -7,6 +7,6 @@ using UnityEngine;
 /// </summary>
 public class DestroyOnPlay : MonoBehaviour {
     private void Awake() {
-        Destroy(gameObject);
+        DestroyImmediate(gameObject);
     }
 }

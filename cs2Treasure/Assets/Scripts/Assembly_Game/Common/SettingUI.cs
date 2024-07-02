@@ -114,11 +114,6 @@ namespace cs2Treasure.Main {
             GamePlayer.Instance.SaveSettingToLoco();
             SetActive(false);
         }
-        public void OnBackToStartClick() {
-            OnCloseClick();
-            PopupUI.InitSceneTransitionProgress();
-            PopupUI.CallSceneTransition(MyScene.StartScene);
-        }
 
         public void OnPostProcessingChange() {
             GamePlayer.Instance.SetPostProcessing(PostProcessingToggle.isOn);

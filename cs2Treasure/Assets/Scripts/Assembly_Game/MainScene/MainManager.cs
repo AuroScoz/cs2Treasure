@@ -8,23 +8,37 @@ using Cysharp.Threading.Tasks;
 using Cinemachine;
 using cs2Treasure.Socket;
 using Gladiators.Main;
+using Unity.Entities;
 
 namespace cs2Treasure.Main {
     public class MainManager : MonoBehaviour {
+
         public static MainManager Instance;
+
+        [SerializeField] Camera SceneCam;
         [SerializeField] Transform[] Cases;
         [SerializeField] Vector3[] CasePos;
         [SerializeField] Vector3[] CaseRot;
         [SerializeField] ParticleSystem Particle_Flash;
 
-        private void Start() {
-            Init();
-        }
 
         public void Init() {
             Instance = this;
             ResetGame();
+            AddCamStack(UICam.Instance.MyCam);
         }
+        /// <summary>
+        /// 將指定camera加入到MyCam的CameraStack中
+        /// </summary>
+        void AddCamStack(Camera _cam) {
+            //因為場景的攝影機有分為場景與UI, 要把場景攝影機設定為Base, UI設定為Overlay, 並在BaseCamera中加入Camera stack
+            UICam.Instance.SetRendererMode(CameraRenderType.Overlay);
+            if (_cam == null) return;
+            var cameraData = SceneCam.GetUniversalAdditionalCameraData();
+            if (cameraData == null) return;
+            cameraData.cameraStack.Add(_cam);
+        }
+
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Q)) {
                 DropCase(0);
@@ -67,7 +81,7 @@ namespace cs2Treasure.Main {
             var resultItem = MathModel.GetResult();
             await UniTask.Delay(200);
             WeaponScroller.GetInstance<WeaponScroller>()?.Play(datas, resultItem.Idx);
-            MainUI.GetInstance<MainUI>().SetResult(resultItem.Odds);
+            PlayerControllUI.GetInstance<PlayerControllUI>().SetResult(resultItem.Odds);
 
         }
 

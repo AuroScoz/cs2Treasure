@@ -99,8 +99,8 @@ namespace cs2Treasure.Socket {
                 }
             } catch (Exception e) {
                 WriteLog.LogError("Parse收到的封包時出錯 : " + e.ToString());
-                if (SceneManager.GetActiveScene().name != MyScene.BattleScene.ToString()) {
-                    WriteLog.LogErrorFormat("不在{0}就釋放資源: ", MyScene.BattleScene, e.ToString());
+                if (SceneManager.GetActiveScene().name != MyScene.MainScene.ToString()) {
+                    WriteLog.LogErrorFormat("不在{0}就釋放資源: ", MyScene.MainScene, e.ToString());
                     Release();
                 }
             }

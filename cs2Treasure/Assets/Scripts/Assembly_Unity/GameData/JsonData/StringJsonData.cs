@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using LitJson;
-using Gladiators.Main;
+using cs2Treasure.Main;
 
 namespace Scoz.Func {
     public class StringJsonData_UnityAssembly {

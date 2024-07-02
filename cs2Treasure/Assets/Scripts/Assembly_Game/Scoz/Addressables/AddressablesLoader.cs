@@ -235,6 +235,23 @@ namespace Scoz.Func {
                 }
             };
         }
+        public static async UniTask<GameObject> GetParticleAsync(string _path) {
+            if (_path == "") {
+                return null;
+            }
+
+            _path = string.Format("Assets/AddressableAssets/Particles/{0}.prefab", _path);
+
+            AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(_path);
+            await handle.ToUniTask(); // 使用 ToUniTask() 等待異步操作完成
+
+            if (handle.Status == AsyncOperationStatus.Succeeded) {
+                return handle.Result;
+            } else {
+                // WriteLog.LogError("讀取資源失敗:" + _path);
+                return null;
+            }
+        }
         public static void GetTexture(string _path, Action<Texture, AsyncOperationHandle> _cb, Action _notExistCB = null) {
             if (_path == "") {
                 return;

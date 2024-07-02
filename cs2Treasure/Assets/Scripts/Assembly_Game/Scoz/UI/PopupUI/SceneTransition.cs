@@ -19,7 +19,7 @@ namespace Scoz.Func {
         [SerializeField] Image SceneTransitionBGImg2 = null;
         [SerializeField] Text SceneTransitionText = null;
         [SerializeField] float WaitSecAfterFinishProgressPercent = 0.8f;
-        public static MyScene PreviousScene = MyScene.StartScene;
+        public static MyScene PreviousScene = MyScene.MainScene;
         MyScene GoScene;
         AsyncOperationHandle TransitionBGHandle;
 
@@ -55,9 +55,9 @@ namespace Scoz.Func {
             JsonSceneTransition data = JsonSceneTransition.GetRandomData();
             if (data != null) {
                 SceneTransitionText.text = data.Description;
-                if (!string.IsNullOrEmpty(data.RefPic)) {
+                if (!string.IsNullOrEmpty(data.Ref)) {
                     SceneTransitionImg.gameObject.SetActive(true);
-                    AddressablesLoader.GetSprite(data.RefPic, (sprite, handle) => {
+                    AddressablesLoader.GetSprite(data.Ref, (sprite, handle) => {
                         if (TransitionBGHandle.IsValid())
                             Addressables.Release(TransitionBGHandle);
                         TransitionBGHandle = handle;

@@ -126,7 +126,7 @@ namespace cs2Treasure.Main {
         /// 3. 玩家自己的PlayerData-Player更新且Ban為true時被呼叫
         /// </summary>
         public void InGameCheckCanPlayGame() {
-            if (SceneManager.GetActiveScene().name == MyScene.StartScene.ToString()) return;//不在StartScene時才會執行
+            //if (SceneManager.GetActiveScene().name == MyScene.StartScene.ToString()) return;//不在StartScene時才會執行
             var gameState = RealmManager.MyRealm.Find<DBGameSetting>(DBGameSettingDoc.GameState.ToString());
             var address = RealmManager.MyRealm.Find<DBGameSetting>(DBGameSettingDoc.Address.ToString());
             var state = GetCanPlayGameState(gameState);

@@ -193,7 +193,7 @@ namespace cs2Treasure.Main {
             });
         }
         void ShowResult() {
-            GetInstance<MainUI>()?.ShowResult();
+            GetInstance<PlayerControllUI>()?.ShowResult();
         }
 
 

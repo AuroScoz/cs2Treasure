@@ -1,7 +1,7 @@
-using Gladiators.Main;
+using cs2Treasure.Main;
 using UnityEngine;
 
-namespace Gladiators.Battle {
+namespace cs2Treasure.Battle {
     public class BattleSceneManager : MonoBehaviour {
         void Start() {
             BaseManager.CreateNewInstance();

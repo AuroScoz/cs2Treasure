@@ -204,14 +204,14 @@ namespace cs2Treasure.Socket {
                 }
             } catch (Exception e) {
                 WriteLog.LogError("Parse收到的封包時出錯 : " + e.ToString());
-                if (SceneManager.GetActiveScene().name != MyScene.BattleScene.ToString()) {
-                    WriteLog.LogErrorFormat("不在{0}就釋放資源: ", MyScene.BattleScene, e.ToString());
+                if (SceneManager.GetActiveScene().name != MyScene.MainScene.ToString()) {
+                    WriteLog.LogErrorFormat("不在{0}就釋放資源: ", MyScene.MainScene, e.ToString());
                     Release();
                 }
             }
         }
         void HandleAuth(SocketCMD<AUTH_TOCLIENT> _packet) {
-            //if (SceneManager.GetActiveScene().name != MyScene.BattleScene.ToString()) return;
+            //if (SceneManager.GetActiveScene().name != MyScene.MainScene.ToString()) return;
             if (_packet.Content == null || !_packet.Content.IsAuth) {
                 WriteLog.LogError("Auth錯誤 遊戲無法開始");
                 return;
