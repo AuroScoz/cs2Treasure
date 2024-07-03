@@ -9,14 +9,45 @@ using SimpleJSON;
 using System.Reflection;
 
 namespace cs2Treasure.Main {
+    public class BetType {
+        public int Bet { get; private set; }
+        public string CaseRef { get; private set; }
+        public Vector3 CasePos { get; set; }
+        public Vector3 CaseRot { get; set; }
+        public List<JsonPayTable> PayList = new List<JsonPayTable>();
+        public BetType(int _bet, string _caseRef) {
+            Bet = _bet;
+            CaseRef = _caseRef;
+        }
+
+        /// <summary>
+        /// (前端測試用)
+        /// </summary>
+        public JsonPayTable GetResultByWeight() {
+            var weightList = PayList.ConvertAll(a => a.Weight);
+            var idx = Prob.GetIndexFromWeigth(weightList);
+            return PayList[idx];
+        }
+    }
     public class JsonPayTable : JsonBase {
         public static string DataName { get; set; }
         public int Group { get; private set; }
-        public double Odds { get; private set; }
+        public int Reward { get; private set; }
         public int Weight { get; private set; }
         public string Ref { get; private set; }
+        public string CaseRef { get; private set; }
+        public string CasePos { get; private set; }
+        public string CaseRot { get; private set; }
+        public enum Bet {
+            Bet10 = 10,
+            Bet20 = 20,
+            Bet30 = 30,
+            Bet50 = 50,
+            Bet100 = 100,
+        }
 
-        public static Dictionary<int, List<JsonPayTable>> PayTableDic = new Dictionary<int, List<JsonPayTable>>();
+
+        public static Dictionary<int, BetType> PayTableDic = new Dictionary<int, BetType>();
 
 
         protected override void SetDataFromJson(JsonData _item) {
@@ -30,8 +61,15 @@ namespace cs2Treasure.Main {
                     propertyInfo.SetValue(this, value, null);
                 }
             }
-            if (PayTableDic.ContainsKey(myData.Group)) PayTableDic[myData.Group].Add(myData);
-            else PayTableDic.Add(myData.Group, new List<JsonPayTable>() { myData });
+            if (PayTableDic.ContainsKey(myData.Group)) {
+                PayTableDic[myData.Group].PayList.Add(myData);
+            } else {
+                BetType betType = new BetType(myData.Group, myData.CaseRef);
+                betType.CasePos = TextManager.ParseTextToVector3(myData.CasePos, ',');
+                betType.CaseRot = TextManager.ParseTextToVector3(myData.CaseRot, ',');
+                betType.PayList.Add(myData);
+                PayTableDic.Add(myData.Group, betType);
+            }
             //自定義屬性
             //foreach (string key in item.Keys) {
             //    switch (key) {
@@ -51,14 +89,21 @@ namespace cs2Treasure.Main {
         /// <summary>
         /// 傳入群組, 根據權重隨機取得該群組隨機一筆資料
         /// </summary>
-        public static JsonPayTable GetRndDataInGroup(int _group) {
-            if (!PayTableDic.ContainsKey(_group)) {
-                WriteLog.LogError($"傳入PayTable Group不存在 Group: {_group}");
+        public static BetType GetBetType(int _bet) {
+            if (!PayTableDic.ContainsKey(_bet)) {
+                WriteLog.LogError($"傳入PayTable Group不存在 Group: {_bet}");
             }
-            var weightList = PayTableDic[_group].ConvertAll(a => a.Weight);
-            var idx = Prob.GetIndexFromWeigth(weightList);
-            return PayTableDic[_group][idx];
+            return PayTableDic[_bet];
         }
+        /// <summary>
+        /// (前端測試用)傳入群組, 根據權重隨機取得該群組隨機一筆資料
+        /// </summary>
+        public static JsonPayTable GetBetResult(int _bet) {
+            var betType = GetBetType(_bet);
+            if (betType == null) return null;
+            return betType.GetResultByWeight();
+        }
+
     }
 
 }

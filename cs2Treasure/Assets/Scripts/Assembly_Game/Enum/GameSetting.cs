@@ -19,9 +19,4 @@ public enum GameSetting
 	SpotlightWaitTime_ChangeUI,
 	PopupEventVibrationMilliSecs,
 	VibrationOnVibrationMilliSecs,
-	HitEffect_OutlineColor,
-	HitEffect_FresnelPower,
-	HitEffect_DecaySec,
-	DieEffect_DissolveDecaySec,
-	Bullet_PositionY,
 }

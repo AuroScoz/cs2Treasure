@@ -17,10 +17,5 @@
 	{	"ID":"SpotlightWaitTime",	"Value":"0.1"},
 	{	"ID":"SpotlightWaitTime_ChangeUI",	"Value":"0.5"},
 	{	"ID":"PopupEventVibrationMilliSecs",	"Value":"300"},
-	{	"ID":"VibrationOnVibrationMilliSecs",	"Value":"500"},
-	{	"ID":"HitEffect_OutlineColor",	"Value":"255,255,255,0"},
-	{	"ID":"HitEffect_FresnelPower",	"Value":"1"},
-	{	"ID":"HitEffect_DecaySec",	"Value":"0.15"},
-	{	"ID":"DieEffect_DissolveDecaySec",	"Value":"1"},
-	{	"ID":"Bullet_PositionY",	"Value":"1.19"}
+	{	"ID":"VibrationOnVibrationMilliSecs",	"Value":"500"}
 ]}

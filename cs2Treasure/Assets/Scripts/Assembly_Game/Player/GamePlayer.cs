@@ -32,6 +32,7 @@ namespace cs2Treasure.Main {
         public GamePlayer()
         : base() {
             Instance = this;
+            Pt = 10000;
         }
         public override void LoadLocoData() {
             base.LoadLocoData();

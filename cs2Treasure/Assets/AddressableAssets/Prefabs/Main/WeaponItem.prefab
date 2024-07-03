@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyImg: {fileID: 2251007217353861863}
-  OddsText: {fileID: 0}
+  Text_Reward: {fileID: 4630000689975932388}
 --- !u!1 &4290641380727291912
 GameObject:
   m_ObjectHideFlags: 0

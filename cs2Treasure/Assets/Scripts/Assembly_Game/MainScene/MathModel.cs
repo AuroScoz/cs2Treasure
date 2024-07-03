@@ -6,11 +6,11 @@ namespace Gladiators.Main {
     public static class MathModel {
         public struct Item {
             public int Idx;
-            public float Odds;
+            public int Reward;
             public int Weight;
-            public Item(int _idx, float _odds, int _weight) {
+            public Item(int _idx, int _reward, int _weight) {
                 Idx = _idx;
-                Odds = _odds;
+                Reward = _reward;
                 Weight = _weight;
             }
         }

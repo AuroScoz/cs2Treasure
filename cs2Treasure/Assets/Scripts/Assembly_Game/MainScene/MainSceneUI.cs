@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
+using static Codice.CM.Common.CmCallContext;
 
 namespace cs2Treasure.Main {
 
@@ -45,11 +46,18 @@ namespace cs2Treasure.Main {
             base.Init();
             MyUILoadingProgress = new LoadingProgress(OnUIFinishedLoad);
 
-            MyWeaponScroller.Init();
-            UIs.Add(MainUIs.WeaponScrollerUI, MyWeaponScroller);
-
             MyPlayerControllUI.Init();
             UIs.Add(MainUIs.PlayerControllUI, MyPlayerControllUI);
+
+            MyUILoadingProgress.AddLoadingProgress("WeaponScroller");
+            MyWeaponScroller.Init();
+            MyWeaponScroller.LoadItemAsset(() => {
+                MyUILoadingProgress.FinishProgress("WeaponScroller");
+                MyWeaponScroller.SetItems(MyPlayerControllUI.CurBet);
+            });
+            UIs.Add(MainUIs.WeaponScrollerUI, MyWeaponScroller);
+
+
 
         }
 

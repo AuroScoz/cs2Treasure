@@ -11,15 +11,48 @@ using static Codice.CM.Common.CmCallContext;
 namespace cs2Treasure.Main {
 
 
-    public class WeaponScroller : BaseUI {
-        [SerializeField] RectTransform ParentTrans;
-        [SerializeField] WeaponItem[] WeaponItems;
+    public class WeaponScroller : ItemSpawner_Remote<WeaponItem> {
         [SerializeField] int ResultDelayMiliSec;
         [SerializeField] float ScrollSpd;
         [SerializeField] Animator TargetFrameAni;
         [SerializeField] float ItemDist = 550;
-        Transform[] WeaponTrans;
 
+
+        float StoppingDecelerationRate = 0.99f;
+        float StopCheckDist = 300;
+        float LockSpd = 1000;
+        float LockMinSpd = 50;
+        float TotalLength;
+
+
+
+        public void SetItems(BetType _betType) {
+            if (!LoadItemFinished) {
+                WriteLog.LogError("WeaponItem尚未載入完成");
+                return;
+            }
+            InActiveAllItem();
+            var datas = _betType.PayList;
+            if (datas == null || datas.Count == 0) return;
+            SetActive(true);
+            AddressablesLoader.GetSpriteAtlas("Weapon", atlas => {
+                for (int i = 0; i < datas.Count; i++) {
+                    Sprite sprite = atlas.GetSprite(datas[i].Ref);
+                    if (sprite == null) WriteLog.LogErrorFormat("datas[i].Ref=" + datas[i].Ref);
+                    if (i < ItemList.Count) {
+                        ItemList[i].SetItem(sprite, datas[i].Reward);
+                        ItemList[i].IsActive = true;
+                        ItemList[i].gameObject.SetActive(true);
+                    } else {
+                        var item = Spawn();
+                        item.SetItem(sprite, datas[i].Reward);
+                    }
+                    float posX = (i - 3) * ItemDist;
+                    ItemList[i].transform.localPosition = new Vector3(posX, 0, 0);
+                }
+                TotalLength = ItemList.Count * ItemDist;
+            });
+        }
 
         public override void RefreshText() {
         }
@@ -33,50 +66,31 @@ namespace cs2Treasure.Main {
         float MoveDist = 0;
         void ResetScroller() {
             float startPos = -3 * ItemDist;
-            for (int i = 0; i < WeaponTrans.Length; i++) {
+            for (int i = 0; i < ItemList.Count; i++) {
                 float posX = startPos + (i * ItemDist);
-                WeaponTrans[i].transform.localPosition = new Vector3(posX, 0, 0);
+                ItemList[i].transform.localPosition = new Vector3(posX, 0, 0);
             }
         }
 
         public override void Init() {
             base.Init();
             CurSpinState = SpinState.Stop;
-            WeaponTrans = new Transform[WeaponItems.Length];
-            for (int i = 0; i < WeaponItems.Length; i++) {
-                WeaponTrans[i] = WeaponItems[i].GetComponent<Transform>();
-            }
-            WriteLog.Log("WeaponTrans=" + WeaponTrans.Length);
-            TotalLength = WeaponTrans.Length * 550;
+
             ResetScroller();
         }
 
 
-        public void Play(WeaponItemData[] _datas, int _winIdx) {
+        public void Play(JsonPayTable _result) {
+            var idx = ItemList.FindIndex(a => a.Reward == _result.Reward);
             SetActive(true);
-            SetSymbols(_datas);
             UniTask.Void(async () => {
                 Spin();
                 await UniTask.Delay(ResultDelayMiliSec);
-                Stop(_winIdx);
+                Stop(idx);
             });
 
         }
 
-        void SetSymbols(WeaponItemData[] _datas) {
-            try {
-                AddressablesLoader.GetSpriteAtlas("Weapon", atlas => {
-                    for (int i = 0; i < WeaponTrans.Length; i++) {
-                        string oddsText = _datas[i].SymbolOdds + "倍";
-                        Sprite sprite = null;
-                        if (_datas[i].SymbolText != "") sprite = atlas.GetSprite(_datas[i].SymbolText);
-                        WeaponItems[i].SetItem(sprite, oddsText);
-                    }
-                });
-            } catch {
-                WriteLog.LogError("SetSymbols錯誤");
-            }
-        }
         void PlayFrameAni() {
             TargetFrameAni.SetTrigger("Play");
         }
@@ -86,11 +100,7 @@ namespace cs2Treasure.Main {
             RunSpin().Forget();
         }
 
-        float StoppingDecelerationRate = 0.99f;
-        float StopCheckDist = 300;
-        float LockSpd = 1000;
-        float LockMinSpd = 50;
-        float TotalLength;
+
         async UniTask RunSpin() {
 
             var curScrollSpd = ScrollSpd;
@@ -117,14 +127,14 @@ namespace cs2Treasure.Main {
                     MoveDist -= TotalLength;
                 }
 
-                for (int i = 0; i < WeaponTrans.Length; i++) {
-                    float newX = -1650 + (i * ItemDist) + MoveDist;
+                for (int i = 0; i < ItemList.Count; i++) {
+                    float newX = -(ItemDist * 3) + (i * ItemDist) + MoveDist;
                     if (newX > 1650) newX -= TotalLength;
-                    WeaponTrans[i].localPosition = new Vector3(newX, WeaponTrans[i].localPosition.y, WeaponTrans[i].localPosition.z);
+                    ItemList[i].transform.localPosition = new Vector3(newX, ItemList[i].transform.localPosition.y, ItemList[i].transform.localPosition.z);
                 }
 
                 if (CurSpinState == SpinState.Stopping) {
-                    float currentX = WeaponTrans[WinIdx].localPosition.x;
+                    float currentX = ItemList[WinIdx].transform.localPosition.x;
                     if (currentX < 0 && currentX > -StopCheckDist && Mathf.Abs(curScrollSpd) <= LockSpd) {
                         CurSpinState = SpinState.LockToTarget;
                         LockToTarget(curScrollSpd).Forget();
@@ -135,11 +145,11 @@ namespace cs2Treasure.Main {
             }
         }
         async UniTask LockToTarget(float _curScrollSpd) {
-            float initialDirection = WeaponTrans[WinIdx].localPosition.x > 0 ? -1 : 1;
+            float initialDirection = ItemList[WinIdx].transform.localPosition.x > 0 ? -1 : 1;
             var curScrollSpd = _curScrollSpd;
             float passDist = 0;
             while (CurSpinState == SpinState.LockToTarget) {
-                float currentX = WeaponTrans[WinIdx].localPosition.x;
+                float currentX = ItemList[WinIdx].transform.localPosition.x;
                 if (currentX < 0 && currentX > -200 && curScrollSpd > LockMinSpd) {
                     curScrollSpd *= StoppingDecelerationRate;
                 }
@@ -158,20 +168,20 @@ namespace cs2Treasure.Main {
                     PlayFrameAni();
                 }
 
-                for (int i = 0; i < WeaponTrans.Length; i++) {
+                for (int i = 0; i < ItemList.Count; i++) {
                     float newX = -1650 + (i * 550) + MoveDist;
                     if (newX > 1650) newX -= TotalLength;
-                    WeaponTrans[i].localPosition = new Vector3(newX, WeaponTrans[i].localPosition.y, WeaponTrans[i].localPosition.z);
+                    ItemList[i].transform.localPosition = new Vector3(newX, ItemList[i].transform.localPosition.y, ItemList[i].transform.localPosition.z);
                 }
 
-                //當WeaponTrans[WinIdx].localPosition.x 目標item位置非常接近0時要停止並把所以item都設定到對的位置
-                float distToCenter = WeaponTrans[WinIdx].localPosition.x;
+                //當ItemList[WinIdx].localPosition.x 目標item位置非常接近0時要停止並把所以item都設定到對的位置
+                float distToCenter = ItemList[WinIdx].transform.localPosition.x;
                 if (Mathf.Abs(distToCenter) < 10) {
                     CurSpinState = SpinState.Stop;
-                    for (int i = 0; i < WeaponTrans.Length; i++) {
-                        Vector3 currentPosition = WeaponTrans[i].localPosition;
+                    for (int i = 0; i < ItemList.Count; i++) {
+                        Vector3 currentPosition = ItemList[i].transform.localPosition;
                         currentPosition.x -= distToCenter;
-                        WeaponTrans[i].localPosition = currentPosition;
+                        ItemList[i].transform.localPosition = currentPosition;
                     }
                     PlayFrameAni();
                     Stopped();

@@ -2,8 +2,10 @@ using Cysharp.Threading.Tasks;
 using Scoz.Func;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static Codice.CM.Common.CmCallContext;
 namespace cs2Treasure.Main {
     public class PlayerControllUI : BaseUI {
 
@@ -12,15 +14,9 @@ namespace cs2Treasure.Main {
         [SerializeField] Text Text_AddPT;
         [SerializeField] Animator Ani_AddPT;
 
-        public enum Bet {
-            Bet10 = 10,
-            Bet20 = 20,
-            Bet30 = 30,
-            Bet50 = 50,
-            Bet100 = 100,
-        }
 
-        Bet CurBet = Bet.Bet10;
+        List<BetType> BetTypes_Sorted = new List<BetType>();
+        public BetType CurBet = null;
 
         protected override void OnEnable() {
             base.OnEnable();
@@ -35,6 +31,7 @@ namespace cs2Treasure.Main {
             SetBetDropDown();
         }
 
+
         void AddPlayerPT(int _value) {
             if (_value == 0) return;
             string aniTrigger = "add";
@@ -46,44 +43,40 @@ namespace cs2Treasure.Main {
             else Text_AddPT.text = _value.ToString();
             RefreshText();
         }
+
         void SetBetDropDown() {
             BetDropDown.ClearOptions();
+            BetTypes_Sorted.Clear();
             List<Dropdown.OptionData> dropDwonDatas = new List<Dropdown.OptionData>();
-            List<Bet> betItems = MyEnum.GetList<Bet>();
-            foreach (var item in betItems) {
-                var data = new Dropdown.OptionData(item.ToString());
-                dropDwonDatas.Add(data);
-            }
-            BetDropDown.AddOptions(dropDwonDatas);
+            BetTypes_Sorted = JsonPayTable.PayTableDic.Values.OrderBy(a => a.Bet).ToList();
+            var betOptions = BetTypes_Sorted.ConvertAll(a => a.Bet.ToString());
+            BetDropDown.AddOptions(betOptions);
+            CurBet = BetTypes_Sorted[0];
         }
 
         public void DropdownValueChanged(Dropdown change) {
-            CurBet = MyEnum.GetList<Bet>()[change.value];
-        }
-
-        int BetToCaseIdx() {
-            if ((int)CurBet <= 30) return 0;
-            else if ((int)CurBet <= 50) return 1;
-            return 2;
+            CurBet = BetTypes_Sorted[change.value];
+            WeaponScroller.GetInstance<WeaponScroller>().SetItems(CurBet);
         }
 
         public void OnPlayClick() {
             WeaponScroller.GetInstance<WeaponScroller>().SetActive(false);
-            AddPlayerPT(-(int)CurBet);
-            MainManager.Instance.DropCase(BetToCaseIdx());
+            GamePlayer.Instance.AddPt(-CurBet.Bet);
+            AddPlayerPT(-CurBet.Bet);
+            MainManager.Instance.DropCase(CurBet);
         }
         public void AutoPlayClick() {
 
         }
-        float ResultOdds;
-        public void SetResult(float _odds) {
-            ResultOdds = _odds;
+        JsonPayTable ResultJsonPayTable;
+        public void SetResult(JsonPayTable _jsonData) {
+            ResultJsonPayTable = _jsonData;
         }
         public void ShowResult() {
             UniTask.Void(async () => {
                 //MyPointRewardEffect.PlayReward(ResultOdds);
                 await UniTask.Delay(500);
-                AddPlayerPT(Mathf.RoundToInt(ResultOdds * (float)CurBet));
+                AddPlayerPT(ResultJsonPayTable.Reward);
                 RefreshText();
             });
         }
